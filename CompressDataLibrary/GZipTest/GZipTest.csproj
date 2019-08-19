@@ -60,5 +60,11 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CompressDataLibrary\CompressDataLibrary.csproj">
+      <Project>{b795015c-115c-470f-a6b5-0df3d510703c}</Project>
+      <Name>CompressDataLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
