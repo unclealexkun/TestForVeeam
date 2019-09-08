@@ -3,6 +3,7 @@
 	public enum Mode
 	{
 		Compress,
-		Decompress
+		Decompress,
+		None
 	}
 }

@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Text;
+using CompressDataLibrary;
+using CompressDataLibrary.Enums;
 using NLog;
 
 namespace GZipTest
@@ -22,15 +23,49 @@ namespace GZipTest
 				}
 				case 1:
 				{
-					logger.Info(Helper);
+					if (args[0].ToLower() == "\\h")
+					{
+						logger.Info(Helper);
+					}
+					else
+					{
+						logger.Error("Unknown parameter.");
+						logger.Error("Command line consist more 3 value! Use \\h for help.");
+
+						return 1;
+					}
 
 					break;
 				}
 				case 3:
 				{
+					Mode mode = Mode.None;
+
+					if (args[0].ToLower() == "compress")
+					{
+						mode = Mode.Compress;
+					}
+
+					if (args[0].ToLower() == "decompress")
+					{
+						mode = Mode.Decompress;
+					}
+
+					var source = new FileInfo(args[1].ToLower());
+					var distribute = new FileInfo(args[2].ToLower());
+					var compressor = new Compressor();
+
 					try
 					{
+						if (mode == Mode.Compress)
+						{
+							compressor.Compress(source.FullName, distribute.FullName);
+						}
 
+						if (mode == Mode.Decompress)
+						{
+							compressor.Decompress(source.FullName, distribute.FullName);
+						}
 					}
 					catch (Exception ex)
 					{
